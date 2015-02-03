@@ -4,9 +4,9 @@
 #define Q 99999
 #define Z ;if(!strncmp(c,
 
-T[]={0,19,10,11,19,21,16, // Piece move step offsets.
-		 15,16,17,0,14,18,31,33,0,15,17,0,15,17,1,16,0, // Piece move steps.
-		 5,11,6,1,28,6,11,5}; // Board setup data.
+T[]={0,19,7,11,19,21,16, // Piece move step offsets.
+     15,16,17,0,14,18,31,33,0,15,17,0,15,17,1,16,0, // Piece move steps.
+     5,11,6,1,28,6,11,5}; // Board setup data.
 B[Q], S, W, X;
 
 F(U, V, p) {
@@ -16,6 +16,10 @@ F(U, V, p) {
 			for(t=f+d;P&S;t+=d) { // Loop over destination squares in this direction.
 				// Invalid square or friendly capture?
 				if ((t&136) || ((u=B[t])&S))
+					break;
+
+				// Check for correct pawn movement.
+				if (P%8==2 && ((d^u)%2 || ((d>0)^(S==32)))
 					break;
 
 				// Other side left in check?
