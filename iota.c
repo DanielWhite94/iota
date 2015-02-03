@@ -19,25 +19,23 @@ F(U, V, p) {
 					break;
 
 				// Check for correct pawn movement.
-				if (P%8==2 && ((d^u)%2 || ((d>0)^(S==32)))
+				if (P%8==2 && ((d^u)%2 || ((d>0)^(S==32))))
 					break;
 
 				// Other side left in check?
 				if (U==17 && (u&16))
-					return 1;
+					return 0;
 
 				// Make move.
 				B[t]=P;
 				B[f]=0;
 				S^=96;
 
-				// Looking to make a move?
-				if ((t==V && f==U) || U==Q)
-					// Test for leaving self in check.
-					if (!F(17, 0, 0)) {
-						W=f,X=t;
-						return 1;
-					}
+				// Looking to make a move? (if our own move, make sure does not leave us in check)
+				if ((t==V && f==U) || (U==Q && F(17,0,0))) {
+					W=f,X=t;
+					return 0;
+				}
 
 				// Undo move.
 				S^=96;
@@ -50,7 +48,7 @@ F(U, V, p) {
 			}
 		}
 	}
-	return 0; // Failed to do anything.
+	return 1; // Failed to do anything.
 }
 
 main(i) {
