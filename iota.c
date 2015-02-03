@@ -47,6 +47,10 @@ F(U, V, p) {
 				if ((P&16) && f==U && t+d==V)
 					continue;
 				
+				// Double pawn first move.
+				if (P%8==2 && (f<32 || f>87) && t==f+d)
+					continue;
+				
 				// Hit a piece or non-slider?
 				if (u || (P&8))
 					break;
