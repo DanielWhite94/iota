@@ -37,7 +37,7 @@ F(U, V, p) {
 
 				// Undo move.
 				S^=96;
-				B[f]=B[t];
+				B[f]=P;
 				B[t]=u;
 
 				// Hit a piece or non-slider?
