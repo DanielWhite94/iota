@@ -4,15 +4,13 @@
 #define Q 99999
 #define Z ;if(!strncmp(c,
 
-T[]={0,19,7,11,19,21,16, // Piece move step offsets.
-     15,16,17,0,14,18,31,33,0,15,17,0,15,17,1,16,0, // Piece move steps.
-     5,11,6,1,28,6,11,5}; // Board setup data.
+char *T="#6*.683234#15BD#24#24$3#(.)$?).("; // Piece move steps and board setup data (subtract '#'=35).
 B[Q], S, W, X;
 
 F(U, V, p) {
 	int f=0,t, i, d, P, u;
 	for(;f<128;f=f+9&~8) { // Loop over squares looking for pieces.
-		for(i=T[(P=B[f])&7],d=0;d<0 || (d=T[i++]);d=-d) { // Loop over move steps for this piece.
+		for(i=T[(P=B[f])&7]-35,d=0;d<0 || (d=T[i++]-35);d=-d) { // Loop over move steps for this piece.
 			for(t=f+d;P&S;t+=d) { // Loop over destination squares in this direction.
 				// Invalid square or friendly capture?
 				if ((t&136) || ((u=B[t])&S))
@@ -60,7 +58,7 @@ main(i) {
 		Z"p",1)) { // Parse 'position' command.
 			for(i=0;i<8;++i) // Reset board to start position.
 				B[i+16]=42,B[i+96]=74, // Pawns.
-				B[i+112]=(B[i]=T[i+24]+32)+(S=32), // Pieces.
+				B[i+112]=(B[i]=T[i+24]-3)+(S=32), // Pieces.
 				B[i+S]=B[i+48]=B[i+64]=B[i+80]=0; // Empty rows.
 			for(;C=strtok(0," ");)
 				F(*C+C[1]*16-881, C[2]+C[3]*16-881, C[4]);
