@@ -29,6 +29,8 @@ F(U, V, p) {
 				B[t]=P;
 				B[f]=0;
 				S^=96;
+				if ((P&16) && t!=f+d)
+					B[(f+t)/2]=B[t+(d>0?1:-2)],B[t+(d>0?1:-2)]=0; // If castling also move rook.
 
 				// Looking to make a move? (if our own move, make sure does not leave us in check)
 				if ((t==V && f==U) || (U==Q && F(17,0,0))) {
@@ -41,6 +43,10 @@ F(U, V, p) {
 				B[f]=P;
 				B[t]=u;
 
+				// If GUI has given us a castling move, loop one more time to do it.
+				if ((P&16) && f==U && t+d==V)
+					continue;
+				
 				// Hit a piece or non-slider?
 				if (u || (P&8))
 					break;
