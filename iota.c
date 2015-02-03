@@ -4,7 +4,8 @@
 #define Q 99999
 #define Z ;if(!strncmp(c,
 
-char *T="#6*.683234#15BD#24#24$3#(.)$?).("; // Piece move steps and board setup data (subtract '#'=35).
+char c[Q], *C,
+     *T="#6*.683234#15BD#24#24$3#(.)$?).("; // Piece move steps and board setup data (subtract '#'=35).
 B[Q], S, W, X;
 
 F(U, V, p) {
@@ -50,7 +51,6 @@ F(U, V, p) {
 }
 
 main(i) {
-	char c[Q], *C;
 	for(;strtok(gets(c)," ");fflush(stdout)) { // Loop, grabbing input and flushing output.
 		Z"uci",4)) puts("id name i\nid author DJW\nuciok") // Reply to 'uci'.
 		Z"i",1)) puts("readyok") // Reply to 'isready'.
