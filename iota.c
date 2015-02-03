@@ -18,7 +18,7 @@ F(U, V, p) {
 					break;
 
 				// Check for correct pawn movement.
-				if (P%8==2 && ((d^u)%2 || ((d>0)^(S==32))))
+				if (P%8==2 && ((d^(u>0))%2 || ((d>0)^(S==32))))
 					break;
 
 				// Other side left in check?
