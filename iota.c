@@ -5,7 +5,7 @@
 #define Z ;if(!strncmp(c,
 
 char c[Q], *C,
-     *T="#6*.683234#15BD#24#24$3#(.)$?).("; // Piece move steps and board setup data (subtract '#'=35).
+     *T="#6*.683234#15BD#24#24$3#(.)$?).(/.2##$"; // Piece move steps, board setup data and promotion XORs (subtract '#'=35).
 B[Q], S, W, X;
 
 F(U, V, p) {
@@ -27,6 +27,8 @@ F(U, V, p) {
 
 				// Make move.
 				B[t]=P;
+				if (P%8==2 && (t<8 || t>103))
+					B[t]^=T[p%7+32]-35; // Promotion.
 				B[f]=0;
 				S^=96;
 				if ((P&16) && t!=f+d)
@@ -35,7 +37,7 @@ F(U, V, p) {
 				// Looking to make a move? (if our own move, make sure does not leave us in check)
 				if ((t==V && f==U) || (U==Q && F(17,0,0))) {
 					W=f,X=t;
-					return 0;
+					return B[t]==P; // Indicate if promotion has NOT occured.
 				}
 
 				// Undo move.
@@ -57,10 +59,10 @@ F(U, V, p) {
 			}
 		}
 	}
-	return 1; // Failed to do anything.
+	return 1;
 }
 
-main(i) {
+main(i, p) {
 	for(;strtok(gets(c)," ");fflush(stdout)) { // Loop, grabbing input and flushing output.
 		Z"uci",4)) puts("id name i\nid author DJW\nuciok") // Reply to 'uci'.
 		Z"i",1)) puts("readyok") // Reply to 'isready'.
@@ -74,7 +76,7 @@ main(i) {
 				F(*C+C[1]*16-881, C[2]+C[3]*16-881, C[4]);
 		}
 		Z"g",1)) // Go command. Make a move and print it.
-			F(Q, 0, 0),
-			printf("bestmove %c%i%c%i\n", W%16+97, W/16+1, X%16+97, X/16+1);
+			p=F(Q, 0, 0),
+			printf("bestmove %c%i%c%i%c\n", W%16+97, W/16+1, X%16+97, X/16+1, p?32:98);
 	}
 }
