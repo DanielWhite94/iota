@@ -2,6 +2,7 @@
 #include <string.h>
 
 #define M )break;
+#define N for(
 #define Q 99999
 #define Z ;if(!strncmp(c,
 
@@ -11,9 +12,9 @@ B[Q], R, S, W, X;
 
 F(U, V, p, r) {
 	int f=0,t, i, d, P, u, q;
-	for(;f<128;f=f+9&~8) { // Loop over squares looking for pieces.
-		for(i=T[(P=B[f])&7]-35,d=0;d<0 || (d=T[i++]-35);d=-d) { // Loop over move steps for this piece.
-			for(t=f+d;P&S;t+=d) { // Loop over destination squares in this direction.
+	N ;f<128;f=f+9&~8) { // Loop over squares looking for pieces.
+		N i=T[(P=B[f])&7]-35,d=0;d<0 || (d=T[i++]-35);d=-d) { // Loop over move steps for this piece.
+			N t=f+d;P&S;t+=d) { // Loop over destination squares in this direction.
 				// Invalid square or friendly capture?
 				if ((t&(q=136)) || ((u=B[t])&S) M
 
@@ -34,8 +35,7 @@ F(U, V, p, r) {
 
 				// Make move.
 				B[t]=P;
-				B[f]=0;
-				B[t^q]=0; // If en-passent capture, remove victim pawn.
+				B[f]=B[t^q]=0; // If en-passent capture, remove victim pawn.
 				if (P%8==2 && (t<8 || t>103))
 					B[t]^=T[p%7+32]-35; // Promotion.
 				S^=96;
@@ -68,16 +68,16 @@ F(U, V, p, r) {
 }
 
 main(i, p) {
-	for(;strtok(gets(c)," ");fflush(stdout)) { // Loop, grabbing input and flushing output.
+	N ;strtok(gets(c)," ");fflush(stdout)) { // Loop, grabbing input and flushing output.
 		Z"uci",4)) puts("id name i\nid author DJW\nuciok") // Reply to 'uci'.
 		Z"i",1)) puts("readyok") // Reply to 'isready'.
 		Z"q",1) M // Quit command, exit.
 		Z"p",1)) { // Parse 'position' command.
-			for(i=0;i<8;++i) // Reset board to start position.
+			N i=0;i<8;++i) // Reset board to start position.
 				B[i+16]=R=42,B[i+96]=74, // Pawns.
 				B[i+112]=(B[i]=T[i+24]-3)+(S=32), // Pieces.
 				B[i+S]=B[i+48]=B[i+64]=B[i+80]=0; // Empty rows.
-			for(;C=strtok(0," ");)
+			N ;C=strtok(0," ");)
 				F(*C+C[1]*16-881, C[2]+C[3]*16-881, C[4], R);
 		}
 		Z"g",1)) // Go command. Make a move and print it.
