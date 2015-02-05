@@ -49,7 +49,7 @@ F(U, V, p) {
 					continue;
 				
 				// Double pawn first move.
-				if (P%8==2 && (f<32 || f>87) && t==f+d)
+				if (P%8==2 && (f<32 || f>87) && t==f+d && (d%2)==0)
 					continue;
 				
 				// Hit a piece or non-slider?
