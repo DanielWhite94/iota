@@ -22,9 +22,8 @@ F(U, V, p) {
 					break;
 
 				// Other side left in check?
-				if (U==17 && (u&16))
+				if (U==8 && (u&16))
 					return 0;
-
 				// Make move.
 				B[t]=P;
 				if (P%8==2 && (t<8 || t>103))
@@ -35,7 +34,7 @@ F(U, V, p) {
 					B[(f+t)/2]=B[t+(d>0?1:-2)],B[t+(d>0?1:-2)]=0; // If castling also move rook.
 
 				// Looking to make a move? (if our own move, make sure does not leave us in check)
-				if ((t==V && f==U) || (U==Q && F(17,0,0))) {
+				if ((t==V && f==U) || (U==Q && F(8,0,0,Q))) {
 					W=f,X=t;
 					return B[t]==P; // Indicate if promotion has NOT occured.
 				}
