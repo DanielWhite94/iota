@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 
+#define I if(
 #define M )break;
 #define N for(
 #define Q 99999
@@ -16,34 +17,34 @@ F(U, V, p, r) {
 		N i=T[(P=B[f])&7]-35,d=0;d<0 || (d=T[i++]-35);d=-d) { // Loop over move steps for this piece.
 			N t=f+d;P&S;t+=d) { // Loop over destination squares in this direction.
 				// Invalid square or friendly capture?
-				if ((t&(q=136)) || ((u=B[t])&S) M
+				I (t&(q=136)) || ((u=B[t])&S) M
 
 				// Special pawn logic.
-				if (P%8==2)
+				I P%8==2)
 				{
-					if (((d>0)^(S==32)) || // Bad direction?
-							(!u && d%2 && t!=r) | // Diagonal without capture?
-							(!(d%2) && u>0) // Straight with capture?
+					I ((d>0)^(S==32)) || // Bad direction?
+					   (!u && d%2 && t!=r) | // Diagonal without capture?
+					   (!(d%2) && u>0) // Straight with capture?
 						M
 
-					if(t==r) q=16; // Is this an en-passent capture?
+					I t==r) q=16; // Is this an en-passent capture?
 				}
 
 				// Other side left in check?
-				if (U==8 && u&16)
+				I U==8 && u&16)
 					return 0;
 
 				// Make move.
 				B[t]=P;
 				B[f]=B[t^q]=0; // If en-passent capture, remove victim pawn.
-				if (P%8==2 && (t<8 || t>103))
+				I P%8==2 && (t<8 || t>103))
 					B[t]^=T[p%7+32]-35; // Promotion.
 				S^=96;
-				if (P&16 && t!=f+d)
+				I P&16 && t!=f+d)
 					B[f+t>>1]=B[t+(d>0?1:-2)],B[t+(d>0?1:-2)]=0; // If castling also move rook.
 
 				// Looking to make a move? (if our own move, make sure does not leave us in check)
-				if ((t==V && f==U) | (U==Q && F(8,0,0,Q))) {
+				I (t==V && f==U) | (U==Q && F(8,0,0,Q))) {
 					W=f,X=t;
 					R=(P%8==2 && t!=f+d ? f+t>>1 : 9); // Set ep-target square if double pawn move.
 					return B[t]==P; // Indicate if promotion has NOT occured.
@@ -55,12 +56,12 @@ F(U, V, p, r) {
 				B[f]=P;
 				B[t]=u;
 
-				if ((P&16 && f==U && t+d==V) | // If GUI has given us a castling move,
-						(P%8==2 && (f<32 || f>87) && t==f+d && !(d%2))) // or double pawn first move, loop once more.
+				I (P&16 && f==U && t+d==V) | // If GUI has given us a castling move,
+					  (P%8==2 && (f<32 || f>87) && t==f+d && !(d%2))) // or double pawn first move, loop once more.
 					continue;
 				
 				// Hit a piece or non-slider?
-				if (u || (P&8) M
+				I u || (P&8) M
 			}
 		}
 	}
