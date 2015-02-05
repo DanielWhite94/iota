@@ -14,11 +14,10 @@ F(U, V, p, r) {
 		for(i=T[(P=B[f])&7]-35,d=0;d<0 || (d=T[i++]-35);d=-d) { // Loop over move steps for this piece.
 			for(t=f+d;P&S;t+=d) { // Loop over destination squares in this direction.
 				// Invalid square or friendly capture?
-				if ((t&136) || ((u=B[t])&S))
+				if ((t&(q=136)) || ((u=B[t])&S))
 					break;
 
 				// Special pawn logic.
-				q=128;
 				if (P%8==2)
 				{
 					if (((d>0)^(S==32)) || // Bad direction?
@@ -26,11 +25,11 @@ F(U, V, p, r) {
 							(!(d%2) && u>0)) // Straight with capture?
 						break;
 
-					q=(t==r ? 16 : q); // Is this an en-passent capture?
+					if(t==r) q=16; // Is this an en-passent capture?
 				}
 
 				// Other side left in check?
-				if (U==8 && (u&16))
+				if (U==8 && u&16)
 					return 0;
 
 				// Make move.
@@ -40,13 +39,13 @@ F(U, V, p, r) {
 				if (P%8==2 && (t<8 || t>103))
 					B[t]^=T[p%7+32]-35; // Promotion.
 				S^=96;
-				if ((P&16) && t!=f+d)
-					B[(f+t)/2]=B[t+(d>0?1:-2)],B[t+(d>0?1:-2)]=0; // If castling also move rook.
+				if (P&16 && t!=f+d)
+					B[f+t>>1]=B[t+(d>0?1:-2)],B[t+(d>0?1:-2)]=0; // If castling also move rook.
 
 				// Looking to make a move? (if our own move, make sure does not leave us in check)
-				if ((t==V && f==U) || (U==Q && F(8,0,0,Q))) {
+				if ((t==V && f==U) | (U==Q && F(8,0,0,Q))) {
 					W=f,X=t;
-					R=((P%8==2 && t!=f+d) ? (t+f)/2 : 9); // Set ep-target square if double pawn move.
+					R=(P%8==2 && t!=f+d ? f+t>>1 : 9); // Set ep-target square if double pawn move.
 					return B[t]==P; // Indicate if promotion has NOT occured.
 				}
 
@@ -57,11 +56,11 @@ F(U, V, p, r) {
 				B[t]=u;
 
 				// If GUI has given us a castling move, loop one more time to do it.
-				if ((P&16) && f==U && t+d==V)
+				if (P&16 && f==U && t+d==V)
 					continue;
 				
 				// Double pawn first move.
-				if (P%8==2 && (f<32 || f>87) && t==f+d && (d%2)==0)
+				if (P%8==2 && (f<32 || f>87) && t==f+d && !(d%2))
 					continue;
 				
 				// Hit a piece or non-slider?
