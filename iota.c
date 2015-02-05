@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 
+#define M )break;
 #define Q 99999
 #define Z ;if(!strncmp(c,
 
@@ -14,16 +15,15 @@ F(U, V, p, r) {
 		for(i=T[(P=B[f])&7]-35,d=0;d<0 || (d=T[i++]-35);d=-d) { // Loop over move steps for this piece.
 			for(t=f+d;P&S;t+=d) { // Loop over destination squares in this direction.
 				// Invalid square or friendly capture?
-				if ((t&(q=136)) || ((u=B[t])&S))
-					break;
+				if ((t&(q=136)) || ((u=B[t])&S) M
 
 				// Special pawn logic.
 				if (P%8==2)
 				{
 					if (((d>0)^(S==32)) || // Bad direction?
-							(!u && d%2 && t!=r) || // Diagonal without capture?
-							(!(d%2) && u>0)) // Straight with capture?
-						break;
+							(!u && d%2 && t!=r) | // Diagonal without capture?
+							(!(d%2) && u>0) // Straight with capture?
+						M
 
 					if(t==r) q=16; // Is this an en-passent capture?
 				}
@@ -55,17 +55,12 @@ F(U, V, p, r) {
 				B[f]=P;
 				B[t]=u;
 
-				// If GUI has given us a castling move, loop one more time to do it.
-				if (P&16 && f==U && t+d==V)
-					continue;
-				
-				// Double pawn first move.
-				if (P%8==2 && (f<32 || f>87) && t==f+d && !(d%2))
+				if ((P&16 && f==U && t+d==V) | // If GUI has given us a castling move,
+						(P%8==2 && (f<32 || f>87) && t==f+d && !(d%2))) // or double pawn first move, loop once more.
 					continue;
 				
 				// Hit a piece or non-slider?
-				if (u || (P&8))
-					break;
+				if (u || (P&8) M
 			}
 		}
 	}
@@ -76,7 +71,7 @@ main(i, p) {
 	for(;strtok(gets(c)," ");fflush(stdout)) { // Loop, grabbing input and flushing output.
 		Z"uci",4)) puts("id name i\nid author DJW\nuciok") // Reply to 'uci'.
 		Z"i",1)) puts("readyok") // Reply to 'isready'.
-		Z"q",1)) break; // Quit command, exit.
+		Z"q",1) M // Quit command, exit.
 		Z"p",1)) { // Parse 'position' command.
 			for(i=0;i<8;++i) // Reset board to start position.
 				B[i+16]=R=42,B[i+96]=74, // Pawns.
