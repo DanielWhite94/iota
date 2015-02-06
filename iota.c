@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <string.h>
 
 #define I if(
 #define M )break;
