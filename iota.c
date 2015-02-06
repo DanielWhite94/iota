@@ -8,7 +8,7 @@
 #define Z ;if(!strncmp(c,
 
 char c[Q], *C,
-     *T="#5)-57234#15BD#24#24$3#(.)$?).(/.2##$"; // Piece move steps, board setup data and promotion XORs (subtract '#'=35).
+     *T="#5)-57234#15BD#24#24$3#EKFA\\FKE/.2##$"; // Piece move steps, board setup data and promotion XORs (subtract '#'=35).
 
 B[Q], R, S, W, X;
 
@@ -76,7 +76,7 @@ main(i, p) {
 		Z"p",1)) { // Parse 'position' command.
 			N i=0;i<8;++i) // Reset board to start position.
 				B[i+16]=R=170,B[i+96]=202, // Pawns.
-				B[i+112]=(B[i]=T[i+23]-3)+(S=32), // Pieces.
+				B[i]=(B[i+112]=T[i+23])-(S=32), // Pieces.
 				B[i+S]=B[i+48]=B[i+64]=B[i+80]=0; // Empty rows.
 			N ;C=strtok(0," ");)
 				F(*C+C[1]*16-881, C[2]+C[3]*16-881, C[4], R);
