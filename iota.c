@@ -62,7 +62,7 @@ F(U, V, p, r) {
 					continue;
 				
 				// Hit a piece or non-slider?
-				I u || (P&8) M
+				I u || P&8 M
 			}
 		}
 	}
