@@ -9,6 +9,7 @@
 
 char c[Q], *C,
      *T="#5)-57234#15BD#24#24$3#(.)$?).(/.2##$"; // Piece move steps, board setup data and promotion XORs (subtract '#'=35).
+
 B[Q], R, S, W, X;
 
 F(U, V, p, r) {
@@ -35,7 +36,7 @@ F(U, V, p, r) {
 					return 0;
 
 				// Make move.
-				B[t]=P;
+				B[t]=P%128;
 				B[f]=B[t^q]=0; // If en-passent capture, remove victim pawn.
 				I P%8==2 && (t<8 || t>103))
 					B[t]^=T[p%7+31]-35; // Promotion.
@@ -47,7 +48,7 @@ F(U, V, p, r) {
 				I (t==V && f==U) | (U==Q && F(8,0,0,Q))) {
 					W=f,X=t;
 					R=(P%8==2 && t!=f+d ? f+t>>1 : 9); // Set ep-target square if double pawn move.
-					return B[t]==P; // Indicate if promotion has NOT occured.
+					return B[t]==P%128; // Indicate if promotion has NOT occured.
 				}
 
 				// Undo move.
@@ -57,7 +58,7 @@ F(U, V, p, r) {
 				B[t]=u;
 
 				I (P&16 && f==U && t+d==V) | // If GUI has given us a castling move,
-					  (P%8==2 && (f<32 || f>87) && t==f+d && !(d%2))) // or double pawn first move, loop once more.
+				   (P&128 && t==f+d && !(d%2))) // or double pawn first move, loop once more.
 					continue;
 				
 				// Hit a piece or non-slider?
@@ -74,7 +75,7 @@ main(i, p) {
 		Z"i",1)) puts("readyok") // Reply to 'isready'.
 		Z"p",1)) { // Parse 'position' command.
 			N i=0;i<8;++i) // Reset board to start position.
-				B[i+16]=R=42,B[i+96]=74, // Pawns.
+				B[i+16]=R=170,B[i+96]=202, // Pawns.
 				B[i+112]=(B[i]=T[i+23]-3)+(S=32), // Pieces.
 				B[i+S]=B[i+48]=B[i+64]=B[i+80]=0; // Empty rows.
 			N ;C=strtok(0," ");)
