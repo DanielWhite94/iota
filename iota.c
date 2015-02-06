@@ -70,7 +70,7 @@ F(U, V, p, r) {
 
 main(i, p) {
 	N ;strtok(gets(c)," ");fflush(stdout)) { // Loop, grabbing input and flushing output.
-		Z"uci",4)) puts("id name i\nid author DJW\nuciok") // Reply to 'uci'.
+		Z"uci",4)) puts("id name i\nid author D\nuciok") // Reply to 'uci'.
 		Z"i",1)) puts("readyok") // Reply to 'isready'.
 		Z"p",1)) { // Parse 'position' command.
 			N i=0;i<8;++i) // Reset board to start position.
