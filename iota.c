@@ -27,7 +27,7 @@ F(U, V, p, r) {
 					   (!(d%2) && u>0) // Straight with capture?
 						M
 
-					I t==r) q=16; // Is this an en-passent capture?
+					I t==r) q=t^16; // Is this an en-passent capture?
 				}
 
 				// Other side left in check?
@@ -36,7 +36,7 @@ F(U, V, p, r) {
 
 				// Make move.
 				B[t]=P%128;
-				B[f]=B[t^q]=0; // If en-passent capture, remove victim pawn.
+				B[f]=B[q]=0; // If en-passent capture, remove victim pawn.
 				I P%8==2 && (t<8 || t>103))
 					B[t]^=T[p%7+31]-35; // Promotion.
 				S^=96;
@@ -51,7 +51,7 @@ F(U, V, p, r) {
 				}
 
 				// Undo move.
-				B[t^q]=10|S; // If en-passent capture, replace victim pawn.
+				B[q]=10|S; // If en-passent capture, replace victim pawn.
 				S^=96;
 				B[f]=P;
 				B[t]=u;
