@@ -15,9 +15,9 @@ F(U, V, p, r) {
 	int f=0,t, i, d, P, u, q;
 	N ;f<128;f=f+9&~8) { // Loop over squares looking for pieces.
 		N i=T[(P=B[f])&7]-35,d=0;d<0 || (d=T[i++]-35);d=-d) { // Loop over move steps for this piece.
-			N t=f+d;P&S;t+=d) { // Loop over destination squares in this direction.
-				// Invalid square or friendly capture?
-				I (t&(q=136)) || ((u=B[t])&S) M
+			N t=f;!((t+=d)&(q=136)) && P&S;) { // Loop over destination squares in this direction.
+				// Friendly capture?
+				I (u=B[t])&S M
 
 				// Special pawn logic.
 				I P%8==2)
