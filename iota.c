@@ -68,7 +68,7 @@ F(U, V, p, r) {
 	return 1;
 }
 
-main(i, p) {
+main(i) {
 	N ;strtok(gets(c)," ");fflush(stdout)) { // Loop, grabbing input and flushing output.
 		Z"uci",4)) puts("id name i\nid author D\nuciok") // Reply to 'uci'.
 		Z"i",1)) puts("readyok") // Reply to 'isready'.
@@ -81,7 +81,7 @@ main(i, p) {
 				F(*C+C[1]*16-881, C[2]+C[3]*16-881, C[4], R);
 		}
 		Z"g",1)) // Go command. Make a move and print it.
-			p=F(Q, 0, 0, R),
-			printf("bestmove %c%i%c%i%c\n", W%16+97, W/16+1, X%16+97, X/16+1, p?32:98);
+			i=F(Q, 0, 0, R),
+			printf("bestmove %c%i%c%i%c\n", W%16+97, W/16+1, X%16+97, X/16+1, i?32:98);
 	}
 }
