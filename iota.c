@@ -41,7 +41,7 @@ F(U, V, p, r) {
 					B[t]^=T[p%7+31]-35; // Promotion.
 				S^=96;
 				I P&16 && t!=f+d)
-					B[f+t>>1]=B[t+(d>0?1:-2)],B[t+(d>0?1:-2)]=0; // If castling also move rook.
+					B[f+t>>1]=B[t+(d*3-1)/2],B[t+(d*3-1)/2]=0; // If castling also move rook.
 
 				// Looking to make a move? (if our own move, make sure does not leave us in check)
 				I (t==V && f==U) | (U==Q && F(8,0,0,Q))) {
