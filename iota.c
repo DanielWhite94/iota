@@ -24,7 +24,7 @@ D(x, y, p, e) {
 				{
 					I ((d>0)^(S==32)) || // Bad direction?
 					   (!v && d%2 && t!=e) | // Diagonal without capture?
-					   (!(d%2) && v>0) // Straight with capture?
+					   !(d%2 || !v) // Straight with capture?
 						K
 
 					I t==e) b=t^16; // Is this an en-passent capture?
@@ -46,7 +46,7 @@ D(x, y, p, e) {
 				// Looking to make a move? (if our own move, make sure does not leave us in check)
 				I (t==y && f==x) | (x==H && D(8,0,0,H))) {
 					X=f,Y=t;
-					E=(m%8==2 && t!=f+d ? f+t>>1 : 9); // Set ep-target square if double pawn move.
+					E= m%8==2&&t!=f+d ? f+t>>1 : 9; // Set ep-target square if double pawn move.
 					return B[t]==m%128; // Indicate if promotion has NOT occured.
 				}
 
