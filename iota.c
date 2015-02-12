@@ -67,14 +67,14 @@ D(x, y, p, e) {
 }
 
 main(i) {
-	F ;strtok(gets(c)," ");fflush(0)) { // Loop, grabbing input and flushing output.
+	F ;strtok(gets(c)," ");fflush(i=0)) { // Loop, grabbing input and flushing output.
 		Z"uci",4)) puts("id name i\nid author D\nuciok") // Reply to 'uci'.
 		Z"i",1)) puts("readyok") // Reply to 'isready'.
 		Z"p",1)) { // Parse 'position' command.
-			F i=0;i<8;++i) // Reset board to start position.
-				B[i+16]=E=170,B[i+96]=202, // Pawns.
+			F ;i<8;) // Reset board to start position.
 				B[i]=(B[i+112]=T[i+23])-(S=32), // Pieces.
-				B[i+S]=B[i+48]=B[i+64]=B[i+80]=0; // Empty rows.
+				B[i+S]=B[i+48]=B[i+64]=B[i+80]=0, // Empty rows.
+				B[i+16]=E=170,B[i+++96]=202; // Pawns.
 			F ;C=strtok(0," ");)
 				D(*C+C[1]*16-881, C[2]+C[3]*16-881, C[4], E);
 		}
