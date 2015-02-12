@@ -18,8 +18,7 @@ D(x, y, p, e) {
 				I (t+=d)&(b=136) | (v=B[t])&S K
 
 				// Special pawn logic.
-				I m%8==2)
-				{
+				I m%8==2)	{
 					I (d>0 ^ S==32) | // Bad direction?
 					   (!v & d%2 & t!=e) | // Diagonal without capture?
 					   !(d%2 | !v) // Straight with capture?
