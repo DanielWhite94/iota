@@ -1,4 +1,4 @@
-#define I if(
+#define I ;if(
 #define K )break;
 #define F for(
 #define H 99999
@@ -33,12 +33,12 @@ D(x, y, p, e) {
 
 				// Make move.
 				B[t]=m%128;
-				B[f]=B[b]=0; // If en-passent capture, remove victim pawn.
+				B[f]=B[b]=0 // If en-passent capture, remove victim pawn.
 				I m%8==2 & (t<8 | t>103))
 					B[t]^=T[p%7+31]-35; // Promotion.
-				S^=96;
+				S^=96
 				I m&16 && t!=f+d)
-					B[f+t>>1]=B[t+(d*3-1)/2],B[t+(d*3-1)/2]=0; // If castling also move rook.
+					B[f+t>>1]=B[t+(d*3-1)/2],B[t+(d*3-1)/2]=0 // If castling also move rook.
 
 				// Looking to make a move? (if our own move, make sure does not leave us in check)
 				I (t==y & f==x) | (x==H && D(8,0,0,H))) {
@@ -51,7 +51,7 @@ D(x, y, p, e) {
 				B[b]=10|S; // If en-passent capture, replace victim pawn.
 				S^=96;
 				B[f]=m;
-				B[t]=v;
+				B[t]=v
 
 				I (m&16 && f==x & t+d==y) | // If GUI has given us a castling move,
 				   (m&128 && t==f+d & !(d%2))) // or double pawn first move, loop once more.
