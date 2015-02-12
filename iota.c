@@ -15,14 +15,14 @@ D(x, y, p, e) {
 		F i=T[(m=B[f])&7]-35,d=0;d<0 || (d=T[i++]-35);d=-d) { // Loop over move steps for this piece.
 			F t=f;m&S;) { // Loop over destination squares in this direction.
 				// Illegal square or friendly capture?
-				I (t+=d)&(b=136) || (v=B[t])&S K
+				I (t+=d)&(b=136) | (v=B[t])&S K
 
 				// Special pawn logic.
 				I m%8==2)
 				{
-					I ((d>0)^(S==32)) || // Bad direction?
-					   (!v && d%2 && t!=e) | // Diagonal without capture?
-					   !(d%2 || !v) // Straight with capture?
+					I (d>0 ^ S==32) | // Bad direction?
+					   (!v & d%2 & t!=e) | // Diagonal without capture?
+					   !(d%2 | !v) // Straight with capture?
 						K
 
 					I t==e) b=t^16; // Is this an en-passent capture?
@@ -35,7 +35,7 @@ D(x, y, p, e) {
 				// Make move.
 				B[t]=m%128;
 				B[f]=B[b]=0; // If en-passent capture, remove victim pawn.
-				I m%8==2 & (t<8 || t>103))
+				I m%8==2 & (t<8 | t>103))
 					B[t]^=T[p%7+31]-35; // Promotion.
 				S^=96;
 				I m&16 && t!=f+d)
@@ -59,7 +59,7 @@ D(x, y, p, e) {
 					continue;
 				
 				// Hit a piece or non-slider?
-				I v || m&8 K
+				I v | m&8 K
 			}
 		}
 	}
