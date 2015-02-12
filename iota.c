@@ -1,5 +1,3 @@
-#include <stdio.h>
-
 #define I if(
 #define K )break;
 #define F for(
@@ -69,7 +67,7 @@ D(x, y, p, e) {
 }
 
 main(i) {
-	F ;strtok(gets(c)," ");fflush(stdout)) { // Loop, grabbing input and flushing output.
+	F ;strtok(gets(c)," ");fflush(0)) { // Loop, grabbing input and flushing output.
 		Z"uci",4)) puts("id name i\nid author D\nuciok") // Reply to 'uci'.
 		Z"i",1)) puts("readyok") // Reply to 'isready'.
 		Z"p",1)) { // Parse 'position' command.
