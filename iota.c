@@ -69,6 +69,9 @@ main(i) {
 	F ;strtok(gets(c)," ");fflush(i=0)) { // Loop, grabbing input and flushing output.
 		Z"uci",4)) puts("id name i\nid author D\nuciok") // Reply to 'uci'.
 		Z"i",1)) puts("readyok") // Reply to 'isready'.
+		Z"g",1)) // Go command. Make a move and print it.
+			i=D(H, 0, 0, E),
+			printf("bestmove %c%i%c%i%c\n", X%16+97, X/16+1, Y%16+97, Y/16+1, i?32:98)
 		Z"p",1)) { // Parse 'position' command.
 			F ;i<8;) // Reset board to start position.
 				B[i]=(B[i+112]=T[i+23])-(S=32), // Pieces.
@@ -77,8 +80,5 @@ main(i) {
 			F ;C=strtok(0," ");)
 				D(*C+C[1]*16-881, C[2]+C[3]*16-881, C[4], E);
 		}
-		Z"g",1)) // Go command. Make a move and print it.
-			i=D(H, 0, 0, E),
-			printf("bestmove %c%i%c%i%c\n", X%16+97, X/16+1, Y%16+97, Y/16+1, i?32:98);
 	}
 }
