@@ -55,7 +55,7 @@ D(x, y, p, e) {
 
 				I (m&16 && f==x & t+d==y) | // If GUI has given us a castling move,
 				   (m&128 && t==f+d & !(d%2))) // or double pawn first move, loop once more.
-					continue;
+					continue
 				
 				// Hit a piece or non-slider?
 				I v | m&8 K
