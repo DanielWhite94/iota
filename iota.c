@@ -73,10 +73,10 @@ main(i) {
 			i=D(H, 0, 0, E),
 			printf("bestmove %c%i%c%i%c\n", X%16+97, X/16+1, Y%16+97, Y/16+1, i?32:98)
 		Z"p",1)) { // Parse 'position' command.
-			F ;i<8;) // Reset board to start position.
+			F ;i<8;B[i+++96]=202) // Reset board to start position.
 				B[i]=(B[i+112]=T[i+23])-(S=32), // Pieces.
 				B[i+S]=B[i+48]=B[i+64]=B[i+80]=0, // Empty rows.
-				B[i+16]=E=170,B[i+++96]=202 // Pawns.
+				B[i+16]=E=170 // White pawns.
 			F ;C=strtok(0," ");)
 				D(*C+C[1]*16-881, C[2]+C[3]*16-881, C[4], E);
 		}
