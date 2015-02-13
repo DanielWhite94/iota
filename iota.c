@@ -1,6 +1,6 @@
 #define I ;if(
 #define K )break;
-#define F for(
+#define F ;for(
 #define H 99999
 #define Z ;if(!strncmp(c,
 
@@ -10,7 +10,7 @@ char c[H], *C,
 B[H], E, S, X, Y;
 
 D(x, y, p, e) {
-	int f=0,t, i, d, m, v, b;
+	int f=0,t, i, d, m, v, b
 	F ;f<128;f=f+9&~8) { // Loop over squares looking for pieces.
 		F i=T[(m=B[f])&7]-35,d=0;d<0 || (d=T[i++]-35);d=-d) { // Loop over move steps for this piece.
 			F t=f;m&S;) { // Loop over destination squares in this direction.
@@ -73,7 +73,7 @@ main(i) {
 			F ;i<8;) // Reset board to start position.
 				B[i]=(B[i+112]=T[i+23])-(S=32), // Pieces.
 				B[i+S]=B[i+48]=B[i+64]=B[i+80]=0, // Empty rows.
-				B[i+16]=E=170,B[i+++96]=202; // Pawns.
+				B[i+16]=E=170,B[i+++96]=202 // Pawns.
 			F ;C=strtok(0," ");)
 				D(*C+C[1]*16-881, C[2]+C[3]*16-881, C[4], E);
 		}
