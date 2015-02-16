@@ -37,7 +37,7 @@ D(x, y, p, e) {
 				I m%8==2 & (t<8 | t>103))
 					B[t]^=T[p%7+31]-35; // Promotion.
 				S^=96
-				I m&16 && t!=f+d)
+				I m&16 && t-f-d)
 					B[f+t>>1]=B[t+(d*3-1)/2],B[t+(d*3-1)/2]=0 // If castling also move rook.
 
 				// Looking to make a move? (if our own move, make sure does not leave us in check)
