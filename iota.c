@@ -53,12 +53,9 @@ D(x, y, p, e) {
 				B[f]=m;
 				B[t]=v
 
-				I (m&16 && f==x & t+d==y) | // If GUI has given us a castling move,
-				   (m&128 && t==f+d & !(d%2))) // or double pawn first move, loop once more.
-					continue
-				
 				// Hit a piece or non-slider?
-				I v | m&8 K
+				// Also check for special cases of double initial pawn move or castling.
+				I (v | m&8) && (!(m&16) | f-x | t+d-y) && (!(m&128) | t-f-d | d%2) K
 			}
 		}
 	}
