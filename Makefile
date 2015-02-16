@@ -3,4 +3,4 @@ all:
 $(OBJS):
 
 size:
-	@gcc -fpreprocessed -dD -E iota.c | tr '\n' ' ' | sed 's/[ \t]//g' | wc -c
+	@gcc -fpreprocessed -dN -P -E iota.c | tr '\n' ' ' | sed 's/[ \t]//g' | wc -c
