@@ -2,6 +2,7 @@
 #define H 99999
 #define I ;if(
 #define K )break;
+#define R return
 #define Z ;if(!strncmp(c,
 
 char c[H], *C,
@@ -29,7 +30,7 @@ D(x, y, p, e) {
 
 				// Other side left in check?
 				I x==8 && v&16)
-					return 0;
+					R 0;
 
 				// Make move.
 				B[t]=m%128;
@@ -44,7 +45,7 @@ D(x, y, p, e) {
 				I (t==y & f==x) | (x==H && D(8,0,0,H))) {
 					X=f,Y=t;
 					E= m%8==2&t!=f+d ? f+t>>1 : 9; // Set ep-target square if double pawn move.
-					return B[t]==m%128; // Indicate if promotion has NOT occured.
+					R B[t]==m%128; // Indicate if promotion has NOT occured.
 				}
 
 				// Undo move.
@@ -59,7 +60,7 @@ D(x, y, p, e) {
 			}
 		}
 	}
-	return 1;
+	R 1;
 }
 
 main(i) {
