@@ -1,7 +1,7 @@
-#define I ;if(
-#define K )break;
 #define F ;for(
 #define H 99999
+#define I ;if(
+#define K )break;
 #define Z ;if(!strncmp(c,
 
 char c[H], *C,
