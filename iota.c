@@ -42,7 +42,7 @@ D(x, y, p, e) {
 					B[f+t>>1]=B[t+(d*3-1)/2],B[t+(d*3-1)/2]=0 // If castling also move rook.
 
 				// Looking to make a move? (if our own move, make sure does not leave us in check)
-				I (t==y & f==x) | (x==H && D(8,0,0,H))) {
+				I t==y & f==x | (x==H && D(8,0,0,H))) {
 					X=f,Y=t;
 					E= m%8==2&t!=f+d ? f+t>>1 : 9; // Set ep-target square if double pawn move.
 					R B[t]==m%128; // Indicate if promotion has NOT occured.
