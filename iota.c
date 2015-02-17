@@ -56,7 +56,7 @@ D(x, y, p, e) {
 
 				// Hit a piece or non-slider?
 				// Also check for special cases of double initial pawn move or castling.
-				I (v | m&8) && (!(m&16) | f-x | t+d-y) && (!(m&128) | t-f-d | d%2) K
+				I (v | m&8) && (~m&16 | f-x | t+d-y) && (~m&128 | t-f-d | d%2) K
 			}
 		}
 	}
