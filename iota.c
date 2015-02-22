@@ -8,7 +8,7 @@
 char c[H], *C,
      *T="#5)-57234#15BD#24#24$3#EKFA\\FKE/.2##$"; // Piece move steps, board setup data and promotion XORs (subtract '#'=35).
 
-B[H], E, S, X, Y;
+B[H], E, S, X, Y, i;
 
 D(x, y, p, e) {
 	int f=0,t, j, d, m, v, b
@@ -39,7 +39,7 @@ D(x, y, p, e) {
 					B[t]^=T[p%7+31]-35; // Promotion.
 				S^=96
 				I m&16 && t-f-d)
-					B[f+t>>1]=B[t+(d*3-1)/2],B[t+(d*3-1)/2]=0 // If castling also move rook.
+					B[f+t>>1]=B[i=t+(d*3-1)/2],B[i]=0 // If castling also move rook.
 
 				// Looking to make a move? (if our own move, make sure does not leave us in check)
 				I t==y & f==x | (x==H && D(8,0,0,H))) {
@@ -63,7 +63,7 @@ D(x, y, p, e) {
 	R 1;
 }
 
-main(i) {
+main() {
 	F ;strtok(gets(c)," ");fflush(i=0)) { // Loop, grabbing input and flushing output.
 		Z"uci",4)) puts("id name i\nid author D\nuciok") // Reply to 'uci'.
 		Z"i",1)) puts("readyok") // Reply to 'isready'.
