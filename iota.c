@@ -11,9 +11,9 @@ char c[H], *C,
 B[H], E, S, X, Y;
 
 D(x, y, p, e) {
-	int f=0,t, i, d, m, v, b
+	int f=0,t, j, d, m, v, b
 	F ;f<H;++f) { // Loop over squares looking for pieces.
-		F i=T[(m=B[f])&7]-35,d=0;d<0 || (d=T[i++]-35);d=-d) { // Loop over move steps for this piece.
+		F j=T[(m=B[f])&7]-35,d=0;d<0 || (d=T[j++]-35);d=-d) { // Loop over move steps for this piece.
 			F t=f;m&S;) { // Loop over destination squares in this direction.
 				// Illegal square or friendly capture?
 				I (t+=d)&(b=136) | (v=B[t])&S K
