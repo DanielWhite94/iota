@@ -45,7 +45,7 @@ D(x, y, p, e) {
 				I t==y & f==x | (x==H && D(8,0,0,H))) {
 					X=f,Y=t;
 					E= m%8==2&t!=f+d ? f+t>>1 : 9; // Set ep-target square if double pawn move.
-					R B[t]==m%128; // Indicate if promotion has NOT occured.
+					R B[t]-m&7; // Indicate if promotion has occured.
 				}
 
 				// Undo move.
@@ -69,7 +69,7 @@ main() {
 		Z"i",1)) puts("readyok") // Reply to 'isready'.
 		Z"g",1)) // Go command. Make a move and print it.
 			i=D(H, 0, 0, E),
-			printf("bestmove %c%i%c%i%c\n", X%16+97, X/16+1, Y%16+97, Y/16+1, i?32:98)
+			printf("bestmove %c%i%c%i%c\n", X%16+97, X/16+1, Y%16+97, Y/16+1, i?98:32)
 		Z"p",1)) { // Parse 'position' command.
 			F S=32;i<8;B[i+++96]=202) // Reset board to start position.
 				B[i]=(B[i+112]=T[i+23])-S, // Pieces.
