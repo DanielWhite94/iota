@@ -78,5 +78,6 @@ main() {
 			F ;C=strtok(0," ");)
 				D(*C+C[1]*16-881, C[2]+C[3]*16-881, C[4], E);
 		}
+		Z"q",1)) return 0; // Reaction to 'quit' command.
 	}
 }
